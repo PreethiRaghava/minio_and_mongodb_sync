@@ -1,0 +1,64 @@
+##### Mongodb step by step process #####
+
+
+1. create a authentication for any one database in mongodb the following command:
+	db.createUser({user:"username", pwd:"password", roles:[{role:"read",db:"db_name"}]})
+
+2. After, creating a authentication for database enable the authorization in mongodb configuration file
+	In the mongod.conf file: (security:
+								authorization: enabled)
+
+3. Then, restart the mongodb service:
+	In windows: computer management-> services & applications-> Services-> search the mongodb server in the list and then restart.
+	In ubuntu : sudo service mongod restart.
+				sudo systemctl restart mongod
+
+4. check the authentication which we had assigned for the database using following command:
+	mongosh --authenticationDatabase "db_name" -u "good" -p "password" (or) mongosh --authenticationDatabase db_name --username user --password 123456
+
+5. It will successfully login into that authorized database. But, it will not access the show collections and data. We have to create a authentication for admin database.
+
+6. Before creating a authentication for admin database, first disable a authorization in the mongod configuration file(mongod.conf) in windows. In ubuntu, to open the mongod configuration by using command 'sudo nano /etc/mongod.conf
+ 
+7. create an authentication for admin database by using following command.
+	db.createUser({user: "master", pwd: "123456", roles:['root']})
+
+8.  after the creating of authentication for admin database enable the authorization in mongodb configuration file, repeat step 2.
+
+9. then, all databases can access in the mongodb localhost and will access to display a collections, data, database creations and collection creaions.
+
+10. Without admin data authorization access, we cannot do anything in whole localhost in mongodb-compass, using python code also ir will not access the data without admin darabase authorization access.
+
+
+------------------------------------------------------------------------------------------------------------
+##### change a bingIP address #####
+
+while working on source and target database in  mongodb through python code, we hav eto change the bingIP as 0.0.0.0 set this IP in place of localhost ip(127.0.0.1) in the mongodb configuration file(mongod.conf)
+
+
+-------------------------------------------------------------------------------------------------------------
+
+
+(mine) databases credentials
+
+Admin :
+Username : boss
+Password : 123456
+
+sai :
+Username : rootUser
+Password : 123456
+
+
+
+
+NUC mongodb databases credentials
+
+Admin:
+Username: master
+password: 123456
+
+
+A
+Username : rootUser
+password : 123456
